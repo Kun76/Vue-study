@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table {
+            width: 700px;
+            margin: auto;
+            border: 1px black solid;
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px black solid;
+        }
+
+        h2 {
+            height: 40px;
+        }
+
+        img {
+            width: 400px;
+            height: 40px;
+        }
+
+        .showhead {
+            width: 700px;
+            height: 40px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="showhead">
+            <h2>品牌案例管理</h2>
+            <img src="../day1/demo/loading.gif" alt="">
+        </div>
+        <table>
+            <tr>
+                <td>
+                    <input type="text" v-model='newbrand' />
+                    <button @click='add'>添加</button>
+                </td>
+                <td><input type="text" placeholder="请输入关键字"></td>
+            </tr>
+        </table>
+        <table v-if='room.length>0'>
+            <tr>
+                <td></td>
+                <td>序号</td>
+                <td>名称</td>
+                <td>创建时间</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for='(item,k) in room' :key='item.id'>
+                <td><input type="checkbox"></td>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.ctime}}</td>
+                <td><button @click='del(k)'>删除</button></td>
+            </tr>
+        </table>
+        <table v-else>
+            <tr>
+                <td>没有任何记录！</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                newbrand: '',
+                newid: 4,
+                room: [
+                    { id: 1, name: '奔驰', ctime: new Date() },
+                    { id: 2, name: '大众', ctime: new Date() },
+                    { id: 3, name: '宝马', ctime: new Date() },],
+            },
+            methods: {
+                // 添加功能
+                add() {
+                    if (this.newbrand.trim() === '') { return false }
+                    // 获取input内的内容,添加到页面中
+                    var obj = { id: this.newid++, name: this.newbrand, ctime: new Date() };
+                    this.room.unshift(obj);
+                    // 清空
+                    this.newbrand = '';
+                },//删除功能
+                del(index) {
+                    if (window.confirm('确定要删除吗')) {
+                        this.room.splice(index, 1);
+                    }
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

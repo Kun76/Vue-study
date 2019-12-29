@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>事件操控</h2>
+        <button @click=say1('哈哈')>说</button>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                city: '12'
+            },
+            // methods 设置方法
+            methods: {
+                say1(str) {
+                    console.log(str); //哈哈
+                    console.log(this); //this指向Vue实例对象
+                    console.log(vm === this);
+                    console.log(this.city);
+
+                },
+                say2() { return 1234 },
+
+            },
+        })
+
+
+    </script>
+</body>
+
+</html>

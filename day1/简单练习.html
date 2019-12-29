@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!-- 创建一个div容器,供Vue使用,推荐使用div -->
+<div id="app">
+    {{city}}------------{{weather}}
+</div>
+
+<body>
+    <!-- 1.引入Vue -->
+    <script src="./vue.js"></script>
+    <script>
+        // 创建Vue实例化对象
+        var vm = new Vue({
+            el: '#app',//element Vue实例与容器的联系
+            data: { //给Vue实例对象声明数据使用,对象形式
+                city: 'Beijing',
+                weather: 'sunshine',
+            }
+        });
+
+    </script>
+</body>
+
+</html>

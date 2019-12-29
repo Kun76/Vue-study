@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="number" v-model='number1'>
+        <select v-model='sel'>
+            <option>+</option>
+            <option>-</option>
+            <option>*</option>
+            <option>/</option>
+        </select>
+        <input type="number" v-model='number2'>
+        <button @click='get()'>=</button>
+        <span>{{he}}</span>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            he: '',
+            number1: '',
+            number2: '',
+            sel: ''
+        },
+        methods: {
+            get() {
+                // switch (this.sel) {
+                //     case '+':
+                //         this.he = 1 * this.number1 + 1 * this.number2;
+                //         break;
+                //     case '-':
+                //         this.he = 1 * this.number1 - 1 * this.number2;
+                //         break;
+                //     case '*':
+                //         this.he = (1 * this.number1) * (1 * this.number2);
+                //         break;
+                //     case '/':
+                //         this.he = (1 * this.number1) / (1 * this.number2);
+                //         break;
+                // }
+                this.he = eval(`${Number(this.number1)} ${this.sel} ${Number(this.number2)}`).toFixed(3);
+            },
+        }
+    });
+
+
+
+
+
+
+</script>
+
+</html>

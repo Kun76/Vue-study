@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    table {
+      width: 700px;
+      margin: auto;
+      border: 1px black solid;
+      border-collapse: collapse;
+    }
+
+    td {
+      border: 1px black solid;
+    }
+
+    h2 {
+      height: 40px;
+    }
+
+    img {
+      width: 400px;
+      height: 40px;
+    }
+
+    .showhead {
+      width: 700px;
+      height: 40px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  </style>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="showhead">
+      <h2>品牌案例管理</h2>
+      <img src="../loading.gif" alt="">
+    </div>
+    <table>
+      <tr>
+        <td>
+          <!-- 设置按键修饰符 -->
+          <input type="text" v-model='newbrand' @keyup.enter='add' @keyup.esc='newbrand=" "' v-dian />
+          <button @click='add'>添加</button>
+        </td>
+        <td><input type="text" placeholder="请输入关键字" v-model='keyname'></td>
+      </tr>
+    </table>
+    <table v-if='getfilter.length>0'>
+      <tr>
+        <td></td>
+        <td>序号</td>
+        <td>名称</td>
+        <td>创建时间</td>
+        <td>操作</td>
+      </tr>
+      <tr v-for='(item,k) in getfilter' :key='item.id'>
+        <td><input type="checkbox"></td>
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.ctime|timeFMT}}</td>
+        <td><button @click='del(k)'>删除</button></td>
+      </tr>
+    </table>
+    <table v-else>
+      <tr>
+        <td>没有任何记录！</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        keyname: '',
+        newbrand: '',
+        newid: 4,
+        room: [
+          { id: 1, name: '奔驰', ctime: new Date() },
+          { id: 2, name: '大众', ctime: new Date() },
+          { id: 3, name: '宝马', ctime: new Date() },],
+      },//设置计算属性
+      computed: {
+        //筛选功能,必须需要return出去
+        getfilter() {
+          return this.room.filter(item => {
+            return item.name.includes(this.keyname)
+          })
+        }
+      },//私有过滤器设置
+      filters: {
+        timeFMT(origin) {
+          var tm = new Date();
+          var yyyy = tm.getFullYear();
+          var mm = (tm.getMonth() + 1).toString().padStart(2, 0);;
+          var dd = tm.getDate().toString().padStart(2, 0);
+          var hh = tm.getHours().toString().padStart(2, 0);
+          var fz = tm.getMinutes().toString().padStart(2, 0);
+          var ss = tm.getSeconds().toString().padStart(2, 0);
+          return `${yyyy}-${mm}-${dd} ${hh}:${fz}:${ss}`;
+        }
+      },
+      methods: {
+        // 添加功能
+        add() {
+          if (this.newbrand.trim() === '') { return false }
+          // 获取input内的内容,添加到页面中
+          var obj = { id: this.newid++, name: this.newbrand, ctime: new Date() };
+          // 添加到数据库中
+          this.room.unshift(obj);
+          // 清空
+          this.newbrand = '';
+        },
+        // 删除功能
+        del(index) {
+          // 判断是否要删除
+          if (window.confirm('确定要删除吗?')) {
+            // 删除data内的数据,data内的数据是实时更新的,
+            this.room.splice(index, 1)
+          }
+        },
+        // 设置自定义指令 
+      }, directives: {
+        'dian': {
+          inserted: function (m) {
+            // m.style.color = 'red'
+            m.focus()
+          }
+
+        }
+      },
+    })
+
+  </script>
+</body>
+
+</html>

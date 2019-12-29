@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p><button @click='flag=!flag'>按钮</button></p>
+        <p v-if='flag'>这是第一行</p>
+        <!-- v-if是直接销毁,并在页面中设置一个占位符 -->
+        <p v-show='flag'>这是第二行</p>
+        <!-- v-show是设置display:none来隐藏的 -->
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: true,
+            },
+            methods: {
+            }
+        });
+    </script>
+</body>
+
+</html>

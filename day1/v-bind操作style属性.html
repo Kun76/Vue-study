@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!-- 创建一个div容器,供Vue使用,推荐使用div -->
+<div id="app">
+    <!-- 对象方式 -->
+    <p :style="{ 'color': 'blue','fontSize': '25px','background-color': 'pink'}">哈哈哈</p>
+    <!-- 数组方式 -->
+    <p :style="[{ 'color': 'blue'},{'fontSize': '25px'},{'background-color': 'pink'}]">哈哈哈</p>
+</div>
+
+<body>
+    <!-- 1.引入Vue -->
+    <script src="./vue.js"></script>
+    <script>
+        // 创建Vue实例化对象
+        var vm = new Vue({
+            el: '#app',//element Vue实例与容器的联系
+            data: { //给Vue实例对象声明数据使用,对象形式
+                city: '北京',
+                weather: '阳光明媚',
+            }
+        });
+
+    </script>
+</body>
+
+</html>

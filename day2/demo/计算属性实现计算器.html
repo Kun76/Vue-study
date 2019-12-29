@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="number" v-model='number1'>
+        <select v-model='sel'>
+            <option value="">-请选择-</option>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="number" v-model='number2'>
+        <span>=</span>
+        <span>{{count}}</span>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            number1: '',
+            number2: '',
+            sel: ''
+        },
+        computed: {
+            count() {
+                if (this.sel === '') { return };
+                return eval(`${Number(this.number1)} ${this.sel} ${Number(this.number2)}`).toFixed(3);
+            }
+        },
+        methods: {
+
+        }
+    });
+
+
+
+
+
+
+</script>
+
+</html>

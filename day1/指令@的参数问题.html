@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>事件操控</h2>
+        <!-- 简写形式 -->
+        <button @click=say1('哈哈')>说</button>
+        <button @click=say2()>说</button>
+        <button @click=say3>说</button>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+            },
+            // methods 设置方法
+            methods: {
+                say1(str) {
+                    console.log(str); //哈哈
+                },
+                say2(str) {
+                    console.log(str); //undefined
+                },
+                say3(str) {
+                    console.log(str); //MouseEvent  鼠标事件对象
+                }
+            },
+        })
+
+
+    </script>
+</body>
+
+</html>

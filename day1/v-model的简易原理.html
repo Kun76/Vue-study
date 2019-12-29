@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h3>v-model的简易原理</h3>
+        <p>{{city}}</p>
+        <hr>
+        <!-- $event代表被绑定元素的行内部,代表事件对象 -->
+        <input type="text" :value='city' @input='city = $event.target.value'>
+        <!-- oninput是键盘事件,可感知输入框内的状态 -->
+        <input type="text" :value='city' @input='feel'>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                city: '北京'
+            },
+            methods: {
+                feel(e) {
+                    this.city = e.target.value
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>
